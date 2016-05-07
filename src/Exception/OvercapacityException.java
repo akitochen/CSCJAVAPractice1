@@ -7,6 +7,6 @@ package Exception;
  * @author 189993
  *
  */
-public class InsufficientMoneyException extends Exception{
+public class OvercapacityException extends Exception {
 
 }

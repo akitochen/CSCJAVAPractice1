@@ -8,5 +8,5 @@ package com.csc.practice.ATM.Interface;
  *
  */
 public interface Depositable {
-
+	int deposit(int money);
 }

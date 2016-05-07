@@ -8,5 +8,5 @@ package com.csc.practice.ATM.Interface;
  *
  */
 public interface WithDrawable {
-
+	int withDraw(int money);
 }

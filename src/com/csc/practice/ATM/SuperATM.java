@@ -13,8 +13,8 @@ import com.csc.practice.Bank.Bank;
  */
 public class SuperATM  extends BaseATM implements Depositable, PassbookUpdatable{
 
-	public SuperATM(Bank bank) {
-		super(bank);
+	public SuperATM(ATMType type, Bank bank) {
+		super(type, bank);
 		MAX_MONEY = 100000000;
 	}
 

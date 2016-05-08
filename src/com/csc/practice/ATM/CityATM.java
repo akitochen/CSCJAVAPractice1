@@ -12,8 +12,8 @@ import com.csc.practice.Bank.Bank;
  */
 public class CityATM extends BaseATM implements Depositable{
 
-	public CityATM(Bank bank) {
-		super(bank);
+	public CityATM(ATMType type, Bank bank) {
+		super(type, bank);
 		MAX_MONEY = 50000000;
 	}
 

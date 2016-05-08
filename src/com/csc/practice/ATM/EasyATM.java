@@ -12,8 +12,8 @@ import com.csc.practice.Bank.Bank;
  */
 public class EasyATM  extends BaseATM implements PassbookUpdatable{
 
-	public EasyATM(Bank bank) {
-		super(bank);
+	public EasyATM(ATMType type, Bank bank) {
+		super(type, bank);
 		MAX_MONEY = 30000000;
 	}
 

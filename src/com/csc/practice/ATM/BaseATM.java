@@ -14,6 +14,8 @@ import com.csc.practice.Bank.Bank;
 public class BaseATM extends AbstractATM implements WithDrawable, Queryable{
 	protected ATMType myATMType = null; 
 	protected Bank ownerBank = null;
+	protected int currentMoney = 0;
+	protected boolean isLogin = false;
 		
 	public BaseATM(ATMType type, Bank bank) {
 		this.myATMType = type;
@@ -21,8 +23,8 @@ public class BaseATM extends AbstractATM implements WithDrawable, Queryable{
 	}
 
 	@Override
-	public boolean login(){
-		
+	public boolean login(ATMCard card){
+		//Bank should check card
 		return false;
 	}
 

@@ -4,7 +4,7 @@
 package com.csc.practice.ATM;
 
 /**
- * @author akito
+ * @author 189993
  *
  */
 public class ATMCard {

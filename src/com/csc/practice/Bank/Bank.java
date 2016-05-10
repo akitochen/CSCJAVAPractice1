@@ -32,6 +32,12 @@ public class Bank extends AbstractBank{
 		// TODO Auto-generated method stub
 		return false;
 	}
+
+	@Override
+	boolean addAccount() {
+		// TODO Auto-generated method stub
+		return false;
+	}
 	
 	
 

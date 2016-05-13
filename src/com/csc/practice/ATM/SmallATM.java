@@ -11,8 +11,8 @@ import com.csc.practice.Bank.Bank;
  */
 public class SmallATM  extends BaseATM {
 	
-	public SmallATM(ATMType type, Bank bank) {
-		super(type, bank);
+	public SmallATM(ATMType type, Bank bank, int initialMoney) {
+		super(type, bank, initialMoney);
 		MAX_MONEY = 10000000;
 	}
 	

@@ -3,20 +3,25 @@
  */
 package Exception;
 
+import com.csc.practice.Bank.Account;
+
 /**
  * @author 189993
  *
  */
-public class InsufficientBalanceException extends Exception {
+public class InsufficientBalanceException extends ATMException {
 	private int withdrawMoney = 0;
+	private int limitMoney = 0;
 	
-	public InsufficientBalanceException(int withdrawMoney){
+	public InsufficientBalanceException(Account account, int withdrawMoney, int limitMoney){
+		super(account);
 		this.withdrawMoney = withdrawMoney;
+		this.limitMoney = limitMoney;
 	}
 	
 	@Override
 	public String getMessage() {
 		// TODO Auto-generated method stub
-		return String.format("´£´Úª÷ÃB %d ¶W¹L³æ¦¸´£´Úª÷ÃB¤W­­ !", this.withdrawMoney);
+		return String.format("å¡è™Ÿ %s, ææ¬¾é‡‘é¡%sè¶…éå–®æ¬¡é ˜å‡ºçš„é‡‘é¡%sä¸Šé™ ", account.getCardId(), this.withdrawMoney, this.limitMoney);
 	}
 }

@@ -8,5 +8,8 @@ package Exception;
  *
  */
 public class NotLoginException extends Exception {
-
+	@Override
+	public String getMessage() {
+		return "帳號未登入!";
+	}
 }

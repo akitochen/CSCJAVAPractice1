@@ -13,8 +13,8 @@ import com.csc.practice.Bank.Bank;
  */
 public class SuperATM  extends BaseATM implements Depositable, PassbookUpdatable{
 
-	public SuperATM(ATMType type, Bank bank) {
-		super(type, bank);
+	public SuperATM(ATMType type, Bank bank, int initialMoney) {
+		super(type, bank, initialMoney);
 		MAX_MONEY = 100000000;
 	}
 
@@ -25,9 +25,8 @@ public class SuperATM  extends BaseATM implements Depositable, PassbookUpdatable
 	}
 
 	@Override
-	public int deposit(int money) {
+	public void deposit(int money) {
 		// TODO Auto-generated method stub
-		return 0;
 	}
 
 }

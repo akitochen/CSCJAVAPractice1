@@ -139,8 +139,4 @@ public class ATMTest {
 			System.out.println(exception.getMessage());
 		}
 	}
-
-	public static void test() {
-
-	}
 }

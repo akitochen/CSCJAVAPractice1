@@ -10,14 +10,15 @@ import com.csc.practice.Bank.Account;
  *
  */
 public class AccountNotFoundException extends ATMException {
-
-	public AccountNotFoundException(Account account) {
-		super(account);
+	private String cardId;
+	
+	public AccountNotFoundException(String cardId) {
+		this.cardId = cardId;
 	}
 	
 	@Override
 	public String getMessage() {
-		return String.format("卡號%s不存在", account.getCardId());
+		return String.format("卡號%s不存在", cardId);
 	}
 
 }

@@ -7,11 +7,13 @@ import com.csc.practice.ATM.Interface.Depositable;
 import com.csc.practice.ATM.Interface.PassbookUpdatable;
 import com.csc.practice.Bank.Bank;
 
+import Exception.NotLoginException;
+
 /**
  * @author 189993
  *
  */
-public class SuperATM  extends BaseATM implements Depositable, PassbookUpdatable{
+public class SuperATM extends BaseATM implements Depositable, PassbookUpdatable {
 
 	public SuperATM(ATMType type, Bank bank, int initialMoney) {
 		super(type, bank, initialMoney);
@@ -19,9 +21,13 @@ public class SuperATM  extends BaseATM implements Depositable, PassbookUpdatable
 	}
 
 	@Override
-	public boolean passBookUpdate() {
-		// TODO Auto-generated method stub
-		return false;
+	public void passBookUpdate()throws NotLoginException {
+		if (super.isLogin) {
+			currentAccount.updatePassbookTimes();
+		}
+		else{
+			throw new NotLoginException();
+		}
 	}
 
 	@Override

@@ -19,7 +19,6 @@ import sun.rmi.runtime.Log;
  *
  */
 public class Bank implements IBank {
-	private ATMFactory atmFactory = null;
 	private List<BaseATM> atmList = null;
 	private Map<String, Account> accountMap = null;
 	// private int currentMoney = 0;
@@ -37,7 +36,6 @@ public class Bank implements IBank {
 	// }
 
 	public Bank() {
-		atmFactory = new ATMFactory(this);
 		atmList = new ArrayList<>();
 		accountMap = new HashMap<String, Account>();
 	}
@@ -62,7 +60,7 @@ public class Bank implements IBank {
 
 	@Override
 	public BaseATM addATM(ATMType atmType, int initialMoney) {
-		BaseATM baseATM = atmFactory.createATM(atmType, initialMoney);
+		BaseATM baseATM = ATMFactory.createATM(atmType, this, initialMoney);
 		atmList.add(baseATM);
 		System.out.println("Add ATM : " + baseATM.toString());
 		return baseATM;
@@ -71,6 +69,7 @@ public class Bank implements IBank {
 	@Override
 	public Account addAccount(String cardId, String name, String password, int deposit) {
 		Account account = new Account(cardId, name, password, deposit);
+		account.setPassbookTimes(Account.MAX_PASSBOOK_TIMES);
 		accountMap.put(account.getCardId(), account);
 		System.out.println("Add Account : " + account.toString());
 		return account;
@@ -83,6 +82,12 @@ public class Bank implements IBank {
 		} else {
 			return null;
 		}
+	}
+
+	@Override
+	public int getMoney(int money) {
+		// 銀行的現金是無限的
+		return money;
 	}
 
 }

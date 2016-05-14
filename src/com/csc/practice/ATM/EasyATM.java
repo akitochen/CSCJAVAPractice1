@@ -6,6 +6,8 @@ package com.csc.practice.ATM;
 import com.csc.practice.ATM.Interface.PassbookUpdatable;
 import com.csc.practice.Bank.Bank;
 
+import Exception.NotLoginException;
+
 /**
  * @author 189993
  *
@@ -18,9 +20,13 @@ public class EasyATM  extends BaseATM implements PassbookUpdatable{
 	}
 
 	@Override
-	public boolean passBookUpdate() {
-		// TODO Auto-generated method stub
-		return false;
+	public void passBookUpdate()throws NotLoginException {
+		if (super.isLogin) {
+			currentAccount.updatePassbookTimes();
+		}
+		else{
+			throw new NotLoginException();
+		}
 	}
 
 }

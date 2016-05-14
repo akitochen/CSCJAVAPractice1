@@ -3,8 +3,10 @@
  */
 package com.csc.practice.Bank;
 
+import com.csc.practice.ATM.BaseATM;
 import com.csc.practice.ATM.Interface.Depositable;
 import com.csc.practice.ATM.Interface.WithDrawable;
+import com.sun.org.apache.xml.internal.security.algorithms.implementations.IntegrityHmac;
 
 import Exception.InsufficientMoneyException;
 import Exception.InsufficientMoneyType;
@@ -15,8 +17,8 @@ import Exception.OutOfPassbookUpdateTimesException;
  * @author 189993
  *
  */
-public class Account implements WithDrawable, Depositable{
-	private final int MAX_PASSBOOK_TIMES = 20;
+public class Account implements WithDrawable, Depositable {
+	public static final int MAX_PASSBOOK_TIMES = 20;
 	private String cardId;
 	private String name;
 	private String password;
@@ -60,6 +62,10 @@ public class Account implements WithDrawable, Depositable{
 		return passbookTimes;
 	}
 
+	public void setPassbookTimes(int passbookTimes) {
+		this.passbookTimes = passbookTimes;
+	}
+
 	public int getDeposit() {
 		return deposit;
 	}
@@ -69,8 +75,8 @@ public class Account implements WithDrawable, Depositable{
 	}
 
 	// method
-	public void updatePassBook() {
-		this.passbookTimes = MAX_PASSBOOK_TIMES;
+	public void updatePassbookTimes() {
+		this.passbookTimes = Account.MAX_PASSBOOK_TIMES;
 	}
 
 	public boolean isOverUpdatePassbookTimes() {
@@ -80,46 +86,49 @@ public class Account implements WithDrawable, Depositable{
 			return false;
 	}
 
-	public boolean verifyCardId() {
-		return false;
+	public boolean verifyCardId(String cardId) {
+		if (cardId != null && this.cardId.equals(cardId)) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 
-	public boolean verifyPassword() {
-		return false;
+	public boolean verifyPassword(String password) {
+		if (password != null && this.password.equals(password)) {
+			return true;
+		} else {
+			return false;
+		}
 	}
-	
+
 	@Override
 	public String toString() {
 		return String.format("CardId : %s , Name : %s , Password : %s , deposit : %d", cardId, name, password, deposit);
 	}
 
 	@Override
-	public void deposit(int depositMoney) throws NotLoginException{
-		if(this.isLogin){
+	public void deposit(int depositMoney) throws NotLoginException {
+		if (this.isLogin) {
 			this.deposit += depositMoney;
-		}
-		else{
+		} else {
 			throw new NotLoginException();
 		}
 	}
 
 	@Override
-	public int withDraw(int withDrawMoney)throws NotLoginException, OutOfPassbookUpdateTimesException, InsufficientMoneyException {
-		if(!isLogin){
+	public int withDraw(int withDrawMoney) throws NotLoginException, InsufficientMoneyException {
+		if (!isLogin) {
 			throw new NotLoginException();
 		}
-		
-		if(!isOverUpdatePassbookTimes()){
-			throw new OutOfPassbookUpdateTimesException(this, MAX_PASSBOOK_TIMES);
-		}
-		
-		if(withDrawMoney > this.deposit){
+
+		if (withDrawMoney > this.deposit) {
 			throw new InsufficientMoneyException(InsufficientMoneyType.Account, this, withDrawMoney, this.deposit);
 		}
-		
+
 		this.deposit -= withDrawMoney;
-		this.passbookTimes++;
-		
+		this.passbookTimes--;
+
 		return withDrawMoney;
 	}
 

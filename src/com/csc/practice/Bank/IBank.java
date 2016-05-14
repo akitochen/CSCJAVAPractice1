@@ -16,4 +16,5 @@ public interface IBank {
 	BaseATM addATM(ATMType atmType, int initialMoney);
 	Account addAccount(String cardId, String name, String password, int deposit);
 	Account getAccount(String cardId);
+	int getMoney(int money);
 }

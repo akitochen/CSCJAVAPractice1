@@ -14,6 +14,8 @@ import Exception.InsufficientMoneyException;
 import Exception.InsufficientMoneyType;
 import Exception.NotLoginException;
 import Exception.OutOfPassbookUpdateTimesException;
+import Exception.OvercapacityException;
+import Exception.OvercapacityType;
 import Exception.PasswordException;
 
 /**
@@ -21,18 +23,21 @@ import Exception.PasswordException;
  *
  */
 public class BaseATM extends AbstractATM implements WithDrawable, Queryable {
-	protected ATMType myATMType = null;
 	protected Bank ownerBank = null;
 	protected int remainMoney = 0;
 	protected boolean isLogin = false;
 	protected Account currentAccount = null;
 
 	public BaseATM(ATMType type, Bank bank, int initialMoney) {
-		this.myATMType = type;
+		super.ONE_TIME_WITHDRAW_MONEY_LIMIT = 3000000;
+		super.myATMType = type;
 		this.ownerBank = bank;
 		this.remainMoney = initialMoney;
 		checkMoney();
-		super.ONE_TIME_WITHDRAW_MONEY_LIMIT = 3000000;
+	}
+
+	public ATMType getATMType() {
+		return super.myATMType;
 	}
 
 	private void checkMoney() {
@@ -51,10 +56,10 @@ public class BaseATM extends AbstractATM implements WithDrawable, Queryable {
 				currentAccount.setLogin(true);
 				return true;
 			} else {
-				throw new PasswordException(currentAccount);
+				throw new PasswordException(account);
 			}
 		} else {
-			throw new AccountNotFoundException(currentAccount);
+			throw new AccountNotFoundException(carId);
 		}
 	}
 
@@ -71,13 +76,16 @@ public class BaseATM extends AbstractATM implements WithDrawable, Queryable {
 			throw new NotLoginException();
 		}
 
+		if (currentAccount.isOverUpdatePassbookTimes()) {
+			throw new OutOfPassbookUpdateTimesException(currentAccount, Account.MAX_PASSBOOK_TIMES);
+		}
+
 		if (withdrawMoney > ONE_TIME_WITHDRAW_MONEY_LIMIT) {
 			throw new InsufficientBalanceException(currentAccount, withdrawMoney, super.ONE_TIME_WITHDRAW_MONEY_LIMIT);
 		}
 
 		if (withdrawMoney > remainMoney) {
-			throw new InsufficientMoneyException(InsufficientMoneyType.ATM, currentAccount, withdrawMoney,
-					remainMoney);
+			throw new InsufficientMoneyException(InsufficientMoneyType.ATM, currentAccount, withdrawMoney, remainMoney);
 		}
 
 		int getMoney = currentAccount.withDraw(withdrawMoney);
@@ -87,7 +95,7 @@ public class BaseATM extends AbstractATM implements WithDrawable, Queryable {
 	}
 
 	@Override
-	public int query()throws NotLoginException{
+	public int query() throws NotLoginException {
 		if (isLogin) {
 			return currentAccount.getDeposit();
 		} else {
@@ -101,9 +109,13 @@ public class BaseATM extends AbstractATM implements WithDrawable, Queryable {
 	}
 
 	@Override
-	public boolean putMoney() {
-		// TODO Auto-generated method stub
-		return false;
+	public void putMoney(int money)throws OvercapacityException {
+		if (this.remainMoney + money > super.MAX_MONEY) {
+			throw new OvercapacityException(OvercapacityType.Bank, currentAccount, money, this.remainMoney, super.MAX_MONEY);
+		} else {
+			int moneyFromBank = ownerBank.getMoney(money);
+			this.remainMoney += moneyFromBank;
+		}
 	}
 
 	@Override

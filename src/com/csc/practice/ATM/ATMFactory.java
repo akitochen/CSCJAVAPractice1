@@ -10,13 +10,11 @@ import com.csc.practice.Bank.Bank;
  *
  */
 public class ATMFactory {
-	private Bank bank = null;
 	
-	public ATMFactory(Bank bank){
-		this.bank = bank;
+	public ATMFactory(){
 	}
 	
-	public BaseATM createATM(ATMType atmType, int initialMoney){
+	public static BaseATM createATM(ATMType atmType, Bank bank, int initialMoney){
 		BaseATM baseATM = null;
 		switch (atmType) {
 		case SmallATM :

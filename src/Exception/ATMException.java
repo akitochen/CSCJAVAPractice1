@@ -12,6 +12,9 @@ import com.csc.practice.Bank.Account;
 public class ATMException extends Exception {
 	protected Account account  = null;
 	
+	public ATMException(){
+	}
+	
 	public ATMException(Account account){
 		this.account = account;
 	}

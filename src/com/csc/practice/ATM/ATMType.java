@@ -8,8 +8,30 @@ package com.csc.practice.ATM;
  *
  */
 public enum ATMType {
-	SmallATM,
-	CityATM,
+	SmallATM, 
+	CityATM, 
 	SuperATM,
-	EasyATM
+	EasyATM;
+
+	public static ATMType parseATMType(String type) {
+		ATMType atmType = null;
+		String typeString = type.toUpperCase();
+		switch (typeString) {
+		case "SMALLATM":
+			atmType = ATMType.SmallATM;
+			break;
+		case "CITYATM":
+			atmType = ATMType.CityATM;
+			break;
+		case "SUPERATM":
+			atmType = ATMType.SuperATM;
+			break;
+		case "EASYATM":
+			atmType = ATMType.EasyATM;
+			break;
+		default:
+			break;
+		}
+		return atmType;
+	}
 }

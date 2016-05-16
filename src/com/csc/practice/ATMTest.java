@@ -83,7 +83,7 @@ public class ATMTest {
 				A1.withDraw(1000000);
 
 				// 補款 test
-				// A1.putMoney(5000000);
+				// A1.putMoney(500000);
 
 				/***** 7.計算所有ATM現金總合並印出，預期是29,000,000。 *****/
 				System.out.println(String.format("sum Of all ATM : %d", bank.sumOfAtm()));
@@ -114,7 +114,7 @@ public class ATMTest {
 				 */
 
 				// test for 存款會造成ATM現金超過它的最大儲存數量
-				// A2.deposit(30000000);
+				//((CityATM) A2).deposit(30000000);
 
 				// test for 補款會造成ATM現金超過它的最大儲存數量
 				// A2.putMoney(30000000);
@@ -128,7 +128,7 @@ public class ATMTest {
 		} catch (OutOfPassbookUpdateTimesException exception) {
 			System.out.println("ATMTest OutOfPassbookUpdateTimes : " + exception.getMessage());
 		} catch (OvercapacityException exception) {
-			System.out.println("ATMTest OutOfPassbookUpdateTimes : " + exception.getMessage());
+			System.out.println("ATMTest OvercapacityException : " + exception.getMessage());
 		} catch (PasswordException exception) {
 			System.out.println("ATMTest PasswordException : " + exception.getMessage());
 		} catch (AccountNotFoundException exception) {

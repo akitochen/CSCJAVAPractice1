@@ -62,7 +62,7 @@ public class Bank implements IBank {
 	public BaseATM addATM(ATMType atmType, int initialMoney) {
 		BaseATM baseATM = ATMFactory.createATM(atmType, this, initialMoney);
 		atmList.add(baseATM);
-		//.out.println("Add ATM : " + baseATM.toString());
+		//System.out.println("Add ATM : " + baseATM.toString());
 		return baseATM;
 	}
 

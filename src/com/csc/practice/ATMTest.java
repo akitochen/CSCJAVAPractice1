@@ -122,21 +122,21 @@ public class ATMTest {
 				A2.logout();
 			}
 		} catch (InsufficientBalanceException exception) {
-			System.out.println("InsufficientBalanceException : " + exception.getMessage());
+			System.out.println("ATMTest InsufficientBalanceException : " + exception.getMessage());
 		} catch (InsufficientMoneyException exception) {
-			System.out.println("InsufficientMoneyException : " + exception.getMessage());
+			System.out.println("ATMTest InsufficientMoneyException : " + exception.getMessage());
 		} catch (OutOfPassbookUpdateTimesException exception) {
-			System.out.println("OutOfPassbookUpdateTimes : " + exception.getMessage());
+			System.out.println("ATMTest OutOfPassbookUpdateTimes : " + exception.getMessage());
 		} catch (OvercapacityException exception) {
-			System.out.println("OutOfPassbookUpdateTimes : " + exception.getMessage());
+			System.out.println("ATMTest OutOfPassbookUpdateTimes : " + exception.getMessage());
 		} catch (PasswordException exception) {
-			System.out.println("PasswordException : " + exception.getMessage());
+			System.out.println("ATMTest PasswordException : " + exception.getMessage());
 		} catch (AccountNotFoundException exception) {
-			System.out.println("AccountNotFoundException : " + exception.getMessage());
+			System.out.println("ATMTest AccountNotFoundException : " + exception.getMessage());
 		} catch (NotLoginException exception) {
-			System.out.println("NotLoginException : " + exception.getMessage());
+			System.out.println("ATMTest NotLoginException : " + exception.getMessage());
 		} catch (Exception exception) {
-			System.out.println(exception.getMessage());
+			System.out.println(exception.toString());
 		}
 	}
 }

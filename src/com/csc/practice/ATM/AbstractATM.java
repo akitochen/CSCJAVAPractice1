@@ -12,7 +12,6 @@ import Exception.PasswordException;
  *
  */
 public abstract class AbstractATM {
-	protected ATMType myATMType;
 	protected int MAX_MONEY;
 	protected int ONE_TIME_WITHDRAW_MONEY_LIMIT;
 	public abstract void putMoney(int money)throws OvercapacityException;

@@ -62,16 +62,15 @@ public class Bank implements IBank {
 	public BaseATM addATM(ATMType atmType, int initialMoney) {
 		BaseATM baseATM = ATMFactory.createATM(atmType, this, initialMoney);
 		atmList.add(baseATM);
-		System.out.println("Add ATM : " + baseATM.toString());
+		//.out.println("Add ATM : " + baseATM.toString());
 		return baseATM;
 	}
 
 	@Override
 	public Account addAccount(String cardId, String name, String password, int deposit) {
 		Account account = new Account(cardId, name, password, deposit);
-		account.setPassbookTimes(Account.MAX_PASSBOOK_TIMES);
 		accountMap.put(account.getCardId(), account);
-		System.out.println("Add Account : " + account.toString());
+		//System.out.println("Add Account : " + account.toString());
 		return account;
 	}
 

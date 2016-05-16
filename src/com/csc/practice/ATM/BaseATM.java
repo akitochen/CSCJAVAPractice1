@@ -23,6 +23,8 @@ import Exception.PasswordException;
  *
  */
 public class BaseATM extends AbstractATM implements WithDrawable, Queryable {
+	protected int atmNumber;
+	protected ATMType myAtmType;
 	protected Bank ownerBank = null;
 	protected int remainMoney = 0;
 	protected boolean isLogin = false;
@@ -30,20 +32,25 @@ public class BaseATM extends AbstractATM implements WithDrawable, Queryable {
 
 	public BaseATM(ATMType type, Bank bank, int initialMoney) {
 		super.ONE_TIME_WITHDRAW_MONEY_LIMIT = 3000000;
-		super.myATMType = type;
+		this.myAtmType = type;
 		this.ownerBank = bank;
 		this.remainMoney = initialMoney;
-		checkMoney();
 	}
 
-	public ATMType getATMType() {
-		return super.myATMType;
+	public void setAtmNumber(int number) {
+		atmNumber = number;
+	}
+	
+	public int getAtmNumber() {
+		return atmNumber;
 	}
 
-	private void checkMoney() {
-		if (remainMoney > super.MAX_MONEY) {
-			// throw Exception
-		}
+	public ATMType geAtmType(){
+		return this.myAtmType;
+	}
+	
+	public int getRemainMoney(){
+		return this.remainMoney;
 	}
 
 	@Override
@@ -118,9 +125,11 @@ public class BaseATM extends AbstractATM implements WithDrawable, Queryable {
 		}
 	}
 
+	
 	@Override
 	public String toString() {
-		return String.format("ATM type : %s , money : %d", myATMType.toString(), remainMoney);
+		return "BaseATM [atmNumber=" + atmNumber + ", myAtmType=" + myAtmType + ", remainMoney=" + remainMoney + "]";
 	}
+
 
 }

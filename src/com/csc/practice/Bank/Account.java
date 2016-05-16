@@ -3,15 +3,12 @@
  */
 package com.csc.practice.Bank;
 
-import com.csc.practice.ATM.BaseATM;
 import com.csc.practice.ATM.Interface.Depositable;
 import com.csc.practice.ATM.Interface.WithDrawable;
-import com.sun.org.apache.xml.internal.security.algorithms.implementations.IntegrityHmac;
 
 import Exception.InsufficientMoneyException;
 import Exception.InsufficientMoneyType;
 import Exception.NotLoginException;
-import Exception.OutOfPassbookUpdateTimesException;
 
 /**
  * @author 189993
@@ -31,6 +28,7 @@ public class Account implements WithDrawable, Depositable {
 		this.name = name;
 		this.password = password;
 		this.deposit = deposit;
+		this.passbookTimes = Account.MAX_PASSBOOK_TIMES;
 	}
 
 	// properties
@@ -103,11 +101,6 @@ public class Account implements WithDrawable, Depositable {
 	}
 
 	@Override
-	public String toString() {
-		return String.format("CardId : %s , Name : %s , Password : %s , deposit : %d", cardId, name, password, deposit);
-	}
-
-	@Override
 	public void deposit(int depositMoney) throws NotLoginException {
 		if (this.isLogin) {
 			this.deposit += depositMoney;
@@ -138,5 +131,11 @@ public class Account implements WithDrawable, Depositable {
 
 	public void setLogin(boolean isLogin) {
 		this.isLogin = isLogin;
+	}
+	
+	@Override
+	public String toString() {
+		return "Account [cardId=" + cardId + ", name=" + name + ", password=" + password + ", passbookTimes="
+				+ passbookTimes + ", deposit=" + deposit + "]";
 	}
 }

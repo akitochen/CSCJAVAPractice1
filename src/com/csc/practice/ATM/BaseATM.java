@@ -55,6 +55,11 @@ public class BaseATM extends AbstractATM implements WithDrawable, Queryable {
 
 	@Override
 	public boolean login(String carId, String password) throws AccountNotFoundException, PasswordException {
+		if(isLogin){
+			System.out.println(String.format("每台ATM同一時間只能有一個人操作, 目前使用者 : %s", currentAccount.getName()));
+			return false;
+		}
+					
 		if (ownerBank.isAccountExists(carId)) {
 			Account account = ownerBank.getAccount(carId);
 			if (password != null && password.equals(account.getPassword())) {

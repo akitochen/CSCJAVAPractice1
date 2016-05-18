@@ -19,6 +19,7 @@ import sun.rmi.runtime.Log;
  *
  */
 public class Bank implements IBank {
+	private int bankId = 0;
 	private List<BaseATM> atmList = null;
 	private Map<String, Account> accountMap = null;
 	// private int currentMoney = 0;
@@ -35,11 +36,16 @@ public class Bank implements IBank {
 	// return currentMoney;
 	// }
 
-	public Bank() {
+	public Bank(int id) {
+		bankId = id;
 		atmList = new ArrayList<>();
 		accountMap = new HashMap<String, Account>();
 	}
 
+	public int getBankId(){
+		return bankId;
+	}
+	
 	@Override
 	public boolean isAccountExists(String cardId) {
 		if (cardId != null && accountMap.containsKey(cardId)) {

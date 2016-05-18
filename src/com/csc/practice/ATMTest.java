@@ -28,7 +28,7 @@ public class ATMTest {
 	 */
 	public static void main(String[] args) {
 		/***** 1.建立一間銀行。 *****/
-		Bank bank = new Bank();
+		Bank bank = new Bank(1);
 
 		/***** 2.為這間銀行建立三個帳戶，分別指定一開始的存款為10,000,000、20,000,000、30,000,000。 *****/
 		Account testAccount = bank.addAccount("00012345", "testAccount", "12345", 10000000);

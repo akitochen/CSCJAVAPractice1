@@ -23,6 +23,7 @@ import Exception.PasswordException;
  *
  */
 public class BaseATM extends AbstractATM implements WithDrawable, Queryable {
+	protected String atmName;
 	protected int atmNumber;
 	protected ATMType myAtmType;
 	protected Bank ownerBank = null;
@@ -136,5 +137,11 @@ public class BaseATM extends AbstractATM implements WithDrawable, Queryable {
 		return "BaseATM [atmNumber=" + atmNumber + ", myAtmType=" + myAtmType + ", remainMoney=" + remainMoney + "]";
 	}
 
+	public String getAtmName() {
+		return atmName;
+	}
 
+	public void setAtmName(String atmName) {
+		this.atmName = atmName;
+	}
 }

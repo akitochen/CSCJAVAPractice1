@@ -22,6 +22,7 @@ public class Account implements WithDrawable, Depositable {
 	private int passbookTimes;
 	private int deposit;
 	private boolean isLogin = false;
+	private int bankId;
 
 	public Account(String cardId, String name, String password, int deposit) {
 		this.cardId = cardId;
@@ -137,5 +138,13 @@ public class Account implements WithDrawable, Depositable {
 	public String toString() {
 		return "Account [cardId=" + cardId + ", name=" + name + ", password=" + password + ", passbookTimes="
 				+ passbookTimes + ", deposit=" + deposit + "]";
+	}
+
+	public int getBankId() {
+		return bankId;
+	}
+
+	public void setBankId(int bankId) {
+		this.bankId = bankId;
 	}
 }

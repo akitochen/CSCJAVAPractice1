@@ -19,6 +19,6 @@ public class OutOfPassbookUpdateTimesException extends ATMException {
 
 	@Override
 	public String getMessage() {
-		return String.format("卡號 %s, 無摺提款次數超過上限%d次", account.getCardId(), maxPassbookTimes);
+		return String.format("卡號 %s, 無摺提款次數超過上限%d次, 請補摺後再提款", account.getCardId(), maxPassbookTimes);
 	}
 }
